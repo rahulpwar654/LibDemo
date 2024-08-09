@@ -1,4 +1,4 @@
-package com.example.mylibrary;
+package com.example.extlib;
 
 import org.junit.Test;
 
