@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.library)
+    id 'maven-publish'  // Add this line
 }
 
 android {
@@ -34,4 +35,27 @@ dependencies {
     androidTestImplementation libs.androidx.espresso.core
 
     implementation 'com.google.code.gson:gson:2.11.0'
+}
+
+ext {
+    libraryGroupId = 'com.example'
+    libraryArtifactId = 'extlib'
+    libraryVersion = '1.0.0'
+}
+
+publishing {
+    publications {
+        aar(MavenPublication) {
+            groupId = libraryGroupId
+            artifactId = libraryArtifactId
+            version = libraryVersion
+
+            artifact("$buildDir/outputs/aar/ExtLib-release.aar")
+        }
+    }
+    // ... rest of the code
+
+    repositories {
+        mavenLocal()  // Publishes to the local Maven repository
+    }
 }
